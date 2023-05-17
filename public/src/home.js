@@ -40,7 +40,22 @@ function getMostPopularBooks(books) {
   .slice(0, slicedBook);
 }
 
-function getMostPopularAuthors(books, authors) {}
+function getMostPopularAuthors(books, authors) {
+  const result = [];
+  authors.forEach(authors => {
+    const returnAuthor = {
+      name: `${authors.name.first} ${authors.name.last}`,
+      count: 0
+    }
+    books.forEach(book => {
+      if (book.authorId === authors.id) {
+        returnAuthor.count += book.borrows.length;
+      }
+    })
+    result.push(returnAuthor);
+  })
+  return result.sort((a, b) => b.count - a.count).slice(0, 5);
+}
 
 module.exports = {
   getTotalBooksCount,
