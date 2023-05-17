@@ -11,12 +11,17 @@ function sortAccountsByLastName(accounts) {
 function getTotalNumberOfBorrows(account, books) {
   const userID = account.id;
   let counter = 0;
+  // use reduce method to iterate over each book object
   const total = books.reduce((account, books) => {
     const borrowRecord = books.borrows;
+    // map over the borrowRecord array, assign the id property to mapID
     const mapID = borrowRecord.map((record) => record.id);
+    // check if mapID includes userID,
+    // if so, user has borrowed a book & increment account by 1
     if (mapID.includes(userID)) account++;
     return account;
   }, counter);
+  // return final accumulated value 
   return total;
 }
 
