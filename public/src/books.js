@@ -1,10 +1,10 @@
-function helperFn (array, id) {
+function helperFn(array, id) {
   return array.find((index) => index.id === id);
 }
 
 function findAuthorById(authors, id) {
   const found = helperFn(authors, id);
-  return found; 
+  return found;
 }
 
 function findBookById(books, id) {
@@ -14,17 +14,22 @@ function findBookById(books, id) {
 
 function partitionBooksByBorrowedStatus(books) {
   const checkedOut = books.filter((book) => book.borrows[0].returned === false);
-  const returnedBooks = books.filter((book) => book.borrows[0].returned === true);
+  const returnedBooks = books.filter(
+    (book) => book.borrows[0].returned === true
+  );
   return [checkedOut, returnedBooks];
 }
 
-function getBorrowersForBook(book, accounts) {  
-  const result = book.borrows.map(borrower => { 
-    const result = accounts.find(account => borrower.id === account.id )
+function getBorrowersForBook(book, accounts) {
+  const result = book.borrows.map((borrower) => {
+    const result = accounts.find((account) => borrower.id === account.id);
     result.returned = borrower.returned;
     return result;
-   })
-   return result.filter((borrower, index)=> result.findIndex(item => item.id === borrower.id) === index);
+  });
+  return result.filter(
+    (borrower, index) =>
+      result.findIndex((item) => item.id === borrower.id) === index
+  );
 }
 
 module.exports = {
