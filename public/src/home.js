@@ -7,6 +7,7 @@ function getTotalAccountsCount(accounts) {
 }
 
 function getBooksBorrowedCount(books) {
+  // filter for returned being set to false
   const nowBorrowed = books.filter(
     (book) => book.borrows[0].returned === false
   );
@@ -14,18 +15,25 @@ function getBooksBorrowedCount(books) {
 }
 
 function getMostCommonGenres(books) {
+  // define genre var and map over books array, 
+  // get genre property from the book object in callback fn
   const genre = books.map((book) => book.genre);
   const result = [];
   const count = {};
-  genre.forEach(function (index) {
+  // iterate over each element in the genre array
+  genre.forEach((index) => {
     count[index] = (count[index] || 0) + 1;
   });
+  // loop over each key in the count object,
+  // then push new object into result array
   for (let key in count) {
     result.push({
       name: key,
       count: count[key],
     });
   }
+  // sort the result array in descending order based on count property,
+  // then return result array containing first five most common genres
   result.sort((a, b) => (a.count < b.count ? 1 : -1));
   return result.slice(0, 5);
 }
