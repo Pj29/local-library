@@ -18,13 +18,7 @@ function getTotalNumberOfBorrows(account, books) {
   return total;
 }
 
-function getBooksPossessedByAccount(account, books, authors) {
-  return books.filter((book) => book.borrows.some(acc => acc.id === account.id && acc.returned === false))
-    .map(book => { const author = authors.find(author => author.id === books.authorId)
-      book.author = author;
-      return book;
-    })
-}
+function getBooksPossessedByAccount(account, books, authors) {}
 
 module.exports = {
   findAccountById,
