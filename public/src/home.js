@@ -15,7 +15,7 @@ function getBooksBorrowedCount(books) {
 }
 
 function getMostCommonGenres(books) {
-  // define genre var and map over books array, 
+  // define genre var and map over books array,
   // get genre property from the book object in callback fn
   const genre = books.map((book) => book.genre);
   const result = [];
@@ -39,7 +39,9 @@ function getMostCommonGenres(books) {
 }
 
 function getMostPopularBooks(books) {
-  const slicedBook = books.length > 5 ? 5 : books.length;
+  // check if books array has more than 5 elements
+  const numberOfBooks = books.length > 5 ? 5 : books.length;
+  // map the books array into a new object and then sort in descending order based on count & slice
   return books
     .map((book) => {
       return {
@@ -48,16 +50,19 @@ function getMostPopularBooks(books) {
       };
     })
     .sort((a, b) => b.count - a.count)
-    .slice(0, slicedBook);
+    .slice(0, numberOfBooks);
 }
 
 function getMostPopularAuthors(books, authors) {
   const result = [];
+  // iterate over authors array, then create a new object for each author
   authors.forEach((authors) => {
     const returnAuthor = {
       name: `${authors.name.first} ${authors.name.last}`,
       count: 0,
     };
+    // check if authorId matches the id of current author in loop
+    // if matched, increment the count of returnAuthor by the number of borrows for the current book
     books.forEach((book) => {
       if (book.authorId === authors.id) {
         returnAuthor.count += book.borrows.length;
@@ -65,6 +70,8 @@ function getMostPopularAuthors(books, authors) {
     });
     result.push(returnAuthor);
   });
+  // sort in descending order based on the number of borrows,
+  // then slice the array to only include the top 5 authors
   return result.sort((a, b) => b.count - a.count).slice(0, 5);
 }
 

@@ -23,7 +23,7 @@ function getTotalNumberOfBorrows(account, books) {
     return account;
     // counter is the second argument to reduce method here
   }, counter);
-  // return final accumulated value 
+  // return final accumulated value
   return total;
 }
 
